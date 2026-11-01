@@ -6,7 +6,14 @@ EXT_NAME = 'Jump & Run'
 EXT_DESCRIPTION = '20 Level, 5 Leben, Schieß- und Hüpfgeister, Boss-Level.'
 EXT_LINKS = [('Spiel starten', 'index')]
 
-PAGE = r"""<!doctype html>
+_api = None
+
+def register(api):
+    global _api
+    _api = api
+
+    def seite(req):
+        return r'''<!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -14,59 +21,64 @@ PAGE = r"""<!doctype html>
 <title>MovieScout Jump & Run</title>
 <style>
 :root {
-  --bg:#090b10;--fg:#fff;--mut:#a0aec0;--card:#121624;
-  --violet:#8a2be2;--violet-dark:#5b18a3;
-  --blue:#3b82f6;--blue-light:#60a5fa;--cyan:#06b6d4;
+  --bg:#10131a;
+  --panel:#1a1f2c;
+  --panel2:#222a3b;
+  --border:#30394e;
+  --text:#f1f3f8;
+  --muted:#9da6b7;
+  --accent:#3b82f6;
+  --accent-hover:#2563eb;
+  --blue-success:#3b82f6;
   --danger:#ef4444;
 }
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 html,body{
-  height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--fg);
+  height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--text);
   font:clamp(12px,2vmin,18px)/1.3 system-ui,sans-serif;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   touch-action:manipulation
 }
-#brand{font-size:1.15em;font-weight:900;color:#fff;letter-spacing:1.5px;margin-bottom:3px;text-shadow:0 0 10px var(--blue)}
-#brand span{color:var(--blue-light)}
+#brand{font-size:1.15em;font-weight:900;color:var(--text);letter-spacing:1.5px;margin-bottom:3px;}
 #ui{
   display:flex;justify-content:space-between;flex-wrap:wrap;
   width:min(96vw,800px);padding:5px 12px;font-weight:bold;font-size:.9em;
-  color:var(--blue-light);background:var(--card);
-  border:1px solid var(--violet-dark);border-radius:10px 10px 0 0;gap:5px
+  color:var(--text);background:var(--panel);
+  border:1px solid var(--border);border-radius:10px 10px 0 0;gap:5px
 }
-#ui span b{color:#fff}
+#ui span b{color:var(--accent)}
 #stage{
   position:relative;width:min(96vw,800px);aspect-ratio:16/9;
-  background:#0d111d;border:2px solid var(--violet);
+  background:#000;border:1px solid var(--border);
   border-radius:0 0 12px 12px;overflow:hidden;
-  box-shadow:0 0 20px rgba(138,43,226,.25)
 }
 canvas{width:100%;height:100%;display:block}
 #msg{
   position:absolute;inset:0;display:none;place-items:center;text-align:center;
-  background:rgba(9,11,16,.94);padding:16px
+  background:rgba(16,19,26,.94);padding:16px
 }
 #msg.on{display:grid}
-#msg h1{color:var(--blue-light);margin:0 0 10px;text-shadow:0 0 10px var(--violet)}
-#msg p{margin:0 0 16px;color:var(--mut)}
+#msg h1{color:var(--text);margin:0 0 10px;}
+#msg p{margin:0 0 16px;color:var(--muted)}
 .btn{
-  font:inherit;background:linear-gradient(135deg,var(--violet),var(--blue));
+  font:inherit;background:var(--blue-success);
   color:#fff;border:0;border-radius:10px;padding:.6em 1.4em;
-  cursor:pointer;font-weight:bold
+  cursor:pointer;font-weight:bold;border:1px solid var(--border);
 }
+.btn:hover{background:var(--accent-hover);}
 #pad{display:none;gap:8px;margin-top:8px;width:min(96vw,800px);justify-content:center}
 #pad button{
   font:inherit;font-size:1.1em;font-weight:bold;padding:.45em .85em;
-  background:var(--card);color:var(--fg);border:2px solid var(--violet);
+  background:var(--panel);color:var(--text);border:1px solid var(--border);
   border-radius:12px;touch-action:none
 }
-#pad button:active{background:var(--violet);border-color:var(--blue-light)}
+#pad button:active{background:var(--accent);color:#fff;}
 @media(pointer:coarse){#pad{display:flex}}
 </style>
 </head>
 <body oncontextmenu="return false">
 
-<div id="brand">🎬 Movie<span>Scout</span> Arcade</div>
+<div id="brand">🎬 MovieScout Arcade</div>
 <div id="ui">
   <span>Lvl: <b id="lvl">1</b>/20</span>
   <span>❤️ Leben: <b id="lives">5</b></span>
@@ -350,7 +362,6 @@ function update(){
   if(p.x+p.w>W)p.x=W-p.w;
   if(p.y>H){loseLife();return;}
 
-  // Spielerprojektile
   for(let i=bullets.length-1;i>=0;i--){
     const b=bullets[i];
     b.x+=b.vx;
@@ -368,7 +379,6 @@ function update(){
     if(hit||b.x<0||b.x>W)bullets.splice(i,1);
   }
 
-  // Gegnerprojektile
   for(let i=enemyBullets.length-1;i>=0;i--){
     const eb=enemyBullets[i];
     eb.x+=eb.vx;
@@ -381,7 +391,6 @@ function update(){
     }
   }
 
-  // Gegner
   for(const e of enemies){
     if(!e.alive)continue;
 
@@ -424,7 +433,6 @@ function update(){
     }
   }
 
-  // Munition
   for(const a of ammoBoxes){
     if(!a.collected&&Math.hypot(p.x+p.w/2-a.x,p.y+p.h/2-a.y)<22){
       a.collected=true;
@@ -432,7 +440,6 @@ function update(){
     }
   }
 
-  // Stacheln
   for(const s of curLvl.spk){
     if(rectHit(p,{x:s[0],y:s[1],w:s[2],h:s[3]})){
       loseLife();
@@ -440,7 +447,6 @@ function update(){
     }
   }
 
-  // Münzen
   for(let i=0;i<curLvl.cns.length;i++){
     const c=curLvl.cns[i];
     if(!curLvl.cnsCollected[i]&&
@@ -451,7 +457,6 @@ function update(){
     }
   }
 
-  // Levelziel
   if(!levelTransition&&rectHit(p,curLvl.goal)){
     levelTransition=true;
     if(level<20)loadLevel(level+1);
@@ -497,34 +502,29 @@ function restart(){
 function draw(){
   ctx.clearRect(0,0,W,H);
 
-  // Hintergrund
   const grad=ctx.createLinearGradient(0,0,0,H);
-  grad.addColorStop(0,'#10172a');
-  grad.addColorStop(1,'#090b10');
+  grad.addColorStop(0,'#161c2b');
+  grad.addColorStop(1,'#10131a');
   ctx.fillStyle=grad;
   ctx.fillRect(0,0,W,H);
 
-  // Sterne
   ctx.fillStyle='rgba(255,255,255,.35)';
   for(let i=0;i<35;i++){
     const x=(i*137)%W,y=(i*71)%350;
     ctx.fillRect(x,y,2,2);
   }
 
-  // Plattformen
-  ctx.fillStyle='#1e2638';
-  ctx.strokeStyle='#8a2be2';
+  ctx.fillStyle='#222a3b';
+  ctx.strokeStyle='#3b82f6';
   ctx.lineWidth=2;
   for(const b of curLvl.plt){
     ctx.fillRect(b[0],b[1],b[2],b[3]);
     ctx.strokeRect(b[0],b[1],b[2],b[3]);
   }
 
-  // Stacheln
   for(const s of curLvl.spk){
     ctx.fillStyle='#ef4444';
     ctx.fillRect(s[0],s[1],s[2],s[3]);
-    ctx.fillStyle='#ff9b9b';
     for(let x=s[0];x<s[0]+s[2];x+=12){
       ctx.beginPath();
       ctx.moveTo(x,s[1]);
@@ -534,7 +534,6 @@ function draw(){
     }
   }
 
-  // Gegner
   for(const e of enemies){
     if(!e.alive)continue;
     ctx.fillStyle=e.type==='shooter'?'#ef4444':'#06b6d4';
@@ -543,14 +542,10 @@ function draw(){
     ctx.lineTo(e.x+e.w,e.y+e.h);
     ctx.lineTo(e.x,e.y+e.h);
     ctx.fill();
-    ctx.fillStyle='#fff';
-    ctx.fillRect(e.x+4,e.y+6,3,3);
-    ctx.fillRect(e.x+13,e.y+6,3,3);
   }
 
-  // Münzen
-  ctx.fillStyle='#06b6d4';
-  ctx.shadowColor='#06b6d4';
+  ctx.fillStyle='#3b82f6';
+  ctx.shadowColor='#3b82f6';
   ctx.shadowBlur=8;
   for(let i=0;i<curLvl.cns.length;i++){
     const c=curLvl.cns[i];
@@ -562,46 +557,30 @@ function draw(){
   }
   ctx.shadowBlur=0;
 
-  // Munitionskisten
   for(const a of ammoBoxes){
     if(!a.collected){
-      ctx.fillStyle='#8a2be2';
+      ctx.fillStyle='#2563eb';
       ctx.fillRect(a.x-8,a.y-8,16,16);
-      ctx.fillStyle='#fff';
-      ctx.fillRect(a.x-3,a.y-3,6,6);
     }
   }
 
-  // Projektile
   ctx.fillStyle='#60a5fa';
   for(const b of bullets)ctx.fillRect(b.x,b.y,b.w,b.h);
   ctx.fillStyle='#ef4444';
   for(const b of enemyBullets)ctx.fillRect(b.x,b.y,b.w,b.h);
 
-  // Ziel
   const g=curLvl.goal;
-  ctx.fillStyle='#8a2be2';
+  ctx.fillStyle='#2563eb';
   ctx.fillRect(g.x,g.y,g.w,g.h);
-  ctx.fillStyle='#60a5fa';
-  ctx.fillRect(g.x+4,g.y+4,g.w-8,g.h-8);
-  ctx.fillStyle='#fff';
-  ctx.beginPath();
-  ctx.arc(g.x+22,g.y+25,2,0,Math.PI*2);
-  ctx.fill();
 
-  // Spieler
   if(p.invulnerable===0||Math.floor(p.invulnerable/5)%2===0){
     ctx.fillStyle='#fff';
     ctx.fillRect(p.x+5,p.y,12,10);
     ctx.fillStyle='#3b82f6';
     ctx.fillRect(p.x+3,p.y+10,16,14);
-    ctx.fillStyle='#60a5fa';
-    ctx.fillRect(p.x+4,p.y+24,5,8);
-    ctx.fillRect(p.x+13,p.y+24,5,8);
   }
 
-  // Levelhinweis
-  ctx.fillStyle='rgba(255,255,255,.5)';
+  ctx.fillStyle='rgba(241,243,248,.5)';
   ctx.font='bold 14px sans-serif';
   ctx.fillText('LEVEL '+level,15,25);
 }
@@ -612,7 +591,6 @@ function loop(){
   requestAnimationFrame(loop);
 }
 
-// Fernbedienungssteuerung nach dem Tetris-Prinzip
 function act(k){
   if(k==='pause'){
     if(gameState==='play'){
@@ -693,7 +671,6 @@ window.addEventListener('blur',()=>{
   keys.up=false;
 });
 
-// Touchsteuerung
 function bindTouch(id,actionType,isKey){
   const btn=document.getElementById(id);
   const start=e=>{
@@ -723,14 +700,11 @@ updateHUD();
 loop();
 </script>
 </body>
-</html>"""
+</html>
+'''
 
-def widget(req):
-    return {
-        'title': 'Jump & Run',
-        'content': 'MovieScout Platformer: 20 Level, Gegner, Münzen und Fernbedienungssteuerung.'
-    }
+    def widget():
+        return {'icon': '🏃‍♂️', 'text': 'Jump & Run', 'sub': '20 Level Arcade-Abenteuer'}
 
-def register(api):
-    api.widget('Jump & Run', widget, ttl=3600, icon='🏃‍♂️')
-    api.route('index', lambda req: PAGE)
+    api.route('index', seite)
+    api.widget('Jump & Run', widget, ttl=60, icon='🏃‍♂️')

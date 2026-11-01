@@ -6,7 +6,14 @@ EXT_NAME = 'Weltraumtunnel'
 EXT_DESCRIPTION = 'Atari-Weltraumtunnel mit zerstörbaren Hindernissen und Gegnern.'
 EXT_LINKS = [('Spiel starten', 'index')]
 
-PAGE = r"""<!doctype html>
+_api = None
+
+def register(api):
+    global _api
+    _api = api
+
+    def seite(req):
+        return r'''<!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -14,11 +21,15 @@ PAGE = r"""<!doctype html>
 <title>Weltraumtunnel</title>
 <style>
 :root {
-  --bg:#05050a;
-  --fg:#e0e0ff;
-  --mut:#a0a0c0;
-  --card:#121222;
-  --acc:#d946ef;
+  --bg:#10131a;
+  --panel:#1a1f2c;
+  --panel2:#222a3b;
+  --border:#30394e;
+  --text:#f1f3f8;
+  --muted:#9da6b7;
+  --accent:#3b82f6;
+  --accent-hover:#2563eb;
+  --blue-success:#3b82f6;
   --danger:#ef4444;
 }
 * {
@@ -32,7 +43,7 @@ html,body {
   margin:0;
   overflow:hidden;
   background:var(--bg);
-  color:var(--fg);
+  color:var(--text);
   font:clamp(10px,1.5vmin,14px)/1.2 system-ui,sans-serif;
   display:flex;
   flex-direction:column;
@@ -43,19 +54,17 @@ html,body {
 #brand {
   font-size:0.9em;
   font-weight:900;
-  color:var(--acc);
+  color:var(--text);
   letter-spacing:1px;
   margin-bottom:4px;
-  text-shadow:0 0 8px var(--acc);
 }
 #stage-wrap {
   position:relative;
   width:min(99vw, 1100px);
   background:#000;
-  border:2px solid #3b3b60;
-  border-radius:8px;
+  border:1px solid var(--border);
+  border-radius:12px;
   overflow:hidden;
-  box-shadow:0 0 20px rgba(217,70,239,.2);
   cursor:crosshair;
 }
 canvas {
@@ -71,20 +80,19 @@ canvas {
   display:none;
   place-items:center;
   text-align:center;
-  background:rgba(5,5,10,.94);
+  background:rgba(16,19,26,.94);
   padding:12px;
 }
 #msg.on {display:grid}
 #msg h1 {
   color:var(--danger);
   margin:0 0 6px;
-  text-shadow:0 0 10px var(--danger);
   font-size:1.4em;
 }
 #msg p {margin:0 0 8px;color:#fff}
 #msg small {
   display:block;
-  color:var(--acc);
+  color:var(--accent);
   margin-top:.3em;
 }
 </style>
@@ -136,7 +144,6 @@ let particles=[];
 let spawnTimer=0;
 let enemySpawnTimer=0;
 
-// Touch/Maus Verfolgung
 let isTouching=false;
 let touchTargetX=null;
 let touchTargetY=null;
@@ -242,7 +249,6 @@ function gameOver(){
 function update(){
   if(gameState!=='play'||paused)return;
 
-  // Touch / Maus Steuerung anwenden
   if(isTouching && touchTargetY!==null && touchTargetX!==null){
     const targetShipY = touchTargetY - ship.h/2;
     const targetShipX = Math.max(30, Math.min(160, touchTargetX - ship.w/2));
@@ -250,7 +256,6 @@ function update(){
     ship.y += (targetShipY - ship.y) * 0.25;
     ship.x += (targetShipX - ship.x) * 0.25;
   } else {
-    // Tastatur / Fernbedienung Bewegung
     if(keys.left){
       ship.speedMultiplier=Math.max(.4,ship.speedMultiplier-.03);
     }
@@ -277,7 +282,6 @@ function update(){
   const ceilingY=bounds.ceiling;
   const floorY=bounds.floor;
 
-  // Tunnelbegrenzung
   if(ship.y<ceilingY){
     ship.y=ceilingY;
     shields=Math.max(0,shields-.4);
@@ -296,7 +300,6 @@ function update(){
     return;
   }
 
-  // Hindernisse erzeugen
   spawnTimer++;
 
   if(spawnTimer>Math.max(35,80-level*4)){
@@ -315,7 +318,6 @@ function update(){
     });
   }
 
-  // Gegner erzeugen
   enemySpawnTimer++;
 
   if(enemySpawnTimer>Math.max(50,120-level*5)){
@@ -332,7 +334,6 @@ function update(){
     });
   }
 
-  // Laser bewegen
   for(let i=lasers.length-1;i>=0;i--){
     const l=lasers[i];
     l.x+=l.vx;
@@ -341,10 +342,6 @@ function update(){
       lasers.splice(i,1);
     }
   }
-
-  // --------------------------------------------------
-  // BALKEN: Treffer, Schrumpfen und Zerstörung
-  // --------------------------------------------------
 
   for(let i=obstacles.length-1;i>=0;i--){
     const o=obstacles[i];
@@ -357,7 +354,6 @@ function update(){
       o.y=floorY-o.h;
     }
 
-    // Laser prüfen
     for(let li=lasers.length-1;li>=0;li--){
       const l=lasers[li];
 
@@ -366,7 +362,7 @@ function update(){
       lasers.splice(li,1);
       score+=50;
 
-      addExplosion(l.x, l.y, 3, '#c084fc');
+      addExplosion(l.x, l.y, 3, '#3b82f6');
 
       o.h*=.75;
 
@@ -377,7 +373,7 @@ function update(){
       }
 
       if(o.h<12){
-        addExplosion(o.x+o.w/2, o.y+o.h/2, 10, '#c084fc');
+        addExplosion(o.x+o.w/2, o.y+o.h/2, 10, '#3b82f6');
         obstacles.splice(i,1);
         score+=100;
         break;
@@ -413,10 +409,6 @@ function update(){
       }
     }
   }
-
-  // --------------------------------------------------
-  // GEGNER: Bewegung und Zerstörung
-  // --------------------------------------------------
 
   for(let i=enemies.length-1;i>=0;i--){
     const e=enemies[i];
@@ -459,7 +451,6 @@ function update(){
     }
   }
 
-  // Partikel
   for(let i=particles.length-1;i>=0;i--){
     const p=particles[i];
     p.x+=p.vx;
@@ -488,14 +479,13 @@ function hideMsg(){
 }
 
 function draw(){
-  ctx.fillStyle='#05050a';
+  ctx.fillStyle='#10131a';
   ctx.fillRect(0,0,W,H);
 
   const bounds=getTunnelBounds();
   const ceilingY=bounds.ceiling;
   const floorY=bounds.floor;
 
-  // Hintergrundsterne
   ctx.fillStyle='rgba(255,255,255,.35)';
 
   for(let i=0;i<40;i++){
@@ -510,36 +500,29 @@ function draw(){
     );
   }
 
-  // Decke
-  ctx.fillStyle='#b45309';
+  ctx.fillStyle='#222a3b';
   ctx.fillRect(0,0,W,ceilingY);
-  ctx.fillStyle='#d97706';
+  ctx.fillStyle='#3b82f6';
   ctx.fillRect(0,ceilingY-4,W,4);
 
-  // Boden
-  ctx.fillStyle='#b45309';
+  ctx.fillStyle='#222a3b';
   ctx.fillRect(0,floorY,W,H-65-floorY);
-  ctx.fillStyle='#d97706';
+  ctx.fillStyle='#3b82f6';
   ctx.fillRect(0,floorY,W,4);
 
-  // Hindernisse
   for(const o of obstacles){
-    ctx.fillStyle='#9333ea';
+    ctx.fillStyle='#2563eb';
     ctx.fillRect(o.x,o.y,o.w,o.h);
 
-    ctx.fillStyle='#c084fc';
+    ctx.fillStyle='#3b82f6';
     ctx.fillRect(
       o.x+2,
       o.y+2,
       Math.max(0,o.w-4),
       Math.max(0,o.h-4)
     );
-
-    ctx.fillStyle='#e9d5ff';
-    ctx.fillRect(o.x+4,o.y+4,2,Math.max(0,o.h-8));
   }
 
-  // Gegner
   for(const e of enemies){
     ctx.fillStyle='#ef4444';
     ctx.beginPath();
@@ -548,34 +531,21 @@ function draw(){
     ctx.lineTo(e.x+e.w,e.y+e.h);
     ctx.closePath();
     ctx.fill();
-
-    ctx.fillStyle='#fecaca';
-    ctx.fillRect(e.x+7,e.y+3,4,2);
-
-    ctx.fillStyle='#f97316';
-    ctx.fillRect(e.x+e.w,e.y+3,3,2);
   }
 
-  // Laser
   ctx.fillStyle='#38bdf8';
   for(const l of lasers){
-    ctx.shadowColor='#38bdf8';
-    ctx.shadowBlur=8;
     ctx.fillRect(l.x,l.y,l.w,l.h);
   }
-  ctx.shadowBlur=0;
 
-  // Explosionen
-  for(let i=particles.length-1;i>=0;i--){
-    const p=particles[i];
-    p.globalAlpha=Math.max(0,p.life/20);
+  for(const p of particles){
+    ctx.globalAlpha=Math.max(0,p.life/20);
     ctx.fillStyle=p.color;
     ctx.fillRect(p.x,p.y,p.size,p.size);
   }
   ctx.globalAlpha=1;
 
-  // Spieler-Raumschiff
-  ctx.fillStyle='#f472b6';
+  ctx.fillStyle='#f1f3f8';
   ctx.beginPath();
   ctx.moveTo(ship.x+ship.w,ship.y+ship.h/2);
   ctx.lineTo(ship.x,ship.y);
@@ -583,49 +553,42 @@ function draw(){
   ctx.closePath();
   ctx.fill();
 
-  ctx.fillStyle='#ffffff';
-  ctx.fillRect(ship.x+6,ship.y+3,4,2);
-
-  ctx.fillStyle='#38bdf8';
-  ctx.fillRect(ship.x-3,ship.y+3,3,2);
-
-  // HUD unten
   const hudY = 275;
-  ctx.fillStyle='#1e1b4b';
+  ctx.fillStyle='#1a1f2c';
   ctx.fillRect(0, hudY, W, 65);
 
-  ctx.strokeStyle='#4338ca';
+  ctx.strokeStyle='#30394e';
   ctx.lineWidth=2;
   ctx.strokeRect(0, hudY, W, 65);
 
-  ctx.fillStyle='#ffffff';
+  ctx.fillStyle='#f1f3f8';
   ctx.font='bold 9px sans-serif';
   ctx.fillText('LEVEL '+level, 10, hudY + 14);
 
-  ctx.fillStyle='#e2e8f0';
+  ctx.fillStyle='#9da6b7';
   ctx.fillText('Score:', 130, hudY + 14);
-  ctx.fillStyle='#d946ef';
+  ctx.fillStyle='#3b82f6';
   ctx.fillRect(165, hudY + 4, 140, 14);
-  ctx.fillStyle='#000000';
+  ctx.fillStyle='#fff';
   ctx.fillText(Math.floor(score), 170, hudY + 14);
 
   function drawMiniBar(label, val, x, y, color){
     val=Math.max(0,Math.min(100,val));
-    ctx.fillStyle='#e2e8f0';
+    ctx.fillStyle='#9da6b7';
     ctx.font='bold 8px sans-serif';
     ctx.fillText(label, x, y + 8);
 
-    ctx.fillStyle='#0f172a';
+    ctx.fillStyle='#222a3b';
     ctx.fillRect(x + 42, y, 55, 9);
-    ctx.strokeStyle='#64748b';
+    ctx.strokeStyle='#30394e';
     ctx.strokeRect(x + 42, y, 55, 9);
 
     ctx.fillStyle=color;
     ctx.fillRect(x + 43, y + 1, Math.max(0, (val/100)*53), 7);
   }
 
-  drawMiniBar('Energy', energy, 10, hudY + 28, '#8b5cf6');
-  drawMiniBar('Shields', shields, 112, hudY + 28, shields>30?'#10b981':'#ef4444');
+  drawMiniBar('Energy', energy, 10, hudY + 28, '#3b82f6');
+  drawMiniBar('Shields', shields, 112, hudY + 28, shields>30?'#3b82f6':'#ef4444');
   drawMiniBar('D-TIME', dTime, 215, hudY + 28, '#06b6d4');
 }
 
@@ -635,7 +598,6 @@ function loop(){
   requestAnimationFrame(loop);
 }
 
-// Touch & Maus Event-Listener direkt auf dem Canvas
 function getCanvasPos(e) {
   const rect = cv.getBoundingClientRect();
   const scaleX = W / rect.width;
@@ -648,7 +610,6 @@ function getCanvasPos(e) {
 
 cv.addEventListener('pointerdown', e => {
   e.preventDefault();
-  
   if(gameState==='over'){
     resetGame();
     return;
@@ -658,7 +619,6 @@ cv.addEventListener('pointerdown', e => {
     hideMsg();
     return;
   }
-
   isTouching = true;
   touchStartTime = Date.now();
   const pos = getCanvasPos(e);
@@ -677,11 +637,9 @@ cv.addEventListener('pointermove', e => {
 const endPointer = e => {
   if(!isTouching) return;
   e.preventDefault();
-  
   if(Date.now() - touchStartTime < 200) {
     fireLaser();
   }
-  
   isTouching = false;
   touchTargetX = null;
   touchTargetY = null;
@@ -690,7 +648,6 @@ const endPointer = e => {
 cv.addEventListener('pointerup', endPointer);
 cv.addEventListener('pointercancel', endPointer);
 
-// Fernbedienung / Tastatur Steuerung
 const KEYS={
   ArrowLeft:'left',
   ArrowRight:'right',
@@ -776,14 +733,11 @@ resetGame();
 loop();
 </script>
 </body>
-</html>"""
+</html>
+'''
 
-def widget(req):
-    return {
-        'title': 'Weltraumtunnel',
-        'content': 'Atari-Arcade mit zerstörbaren Balken und Gegnern.'
-    }
+    def widget():
+        return {'icon': '🚀', 'text': 'Weltraumtunnel', 'sub': 'Atari-Arcade'}
 
-def register(api):
-    api.widget('Weltraumtunnel', widget, ttl=3600, icon='🚀')
-    api.route('index', lambda req: PAGE)
+    api.route('index', seite)
+    api.widget('Weltraumtunnel', widget, ttl=60, icon='🚀')

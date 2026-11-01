@@ -5,8 +5,16 @@ EXT_ID = 'fun_gadgets'
 EXT_NAME = 'Fun Gadgets'
 EXT_DESCRIPTION = 'Interaktive Couch-Tools mit Snack-Berater, Binge-Rechner, Fernbedienungs-Duell, B-Movie-Generator und magischem Orakel.'
 EXT_LINKS = [('Gadgets öffnen', 'index')]
+EXT_SETTINGS = []
 
-PAGE = r"""<!doctype html>
+_api = None
+
+def register(api):
+    global _api
+    _api = api
+
+    def seite(req):
+        return r"""<!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -14,19 +22,22 @@ PAGE = r"""<!doctype html>
 <title>Fun Gadgets</title>
 <style>
 :root{
-  --bg:#0f141b;
-  --fg:#e8edf3;
-  --mut:#93a1b3;
-  --card:#18202b;
-  --acc:#ffb703;
-  --acc2:#4da3ff
+  --bg:#10131a;
+  --panel:#1a1f2c;
+  --panel2:#222a3b;
+  --border:#30394e;
+  --text:#f1f3f8;
+  --muted:#9da6b7;
+  --accent:#3b82f6;
+  --accent-hover:#2563eb;
+  --blue-success:#3b82f6;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
   min-height:100vh;
   background:var(--bg);
-  color:var(--fg);
+  color:var(--text);
   font:clamp(13px,1.8vmin,18px)/1.3 system-ui,sans-serif;
   display:flex;
   justify-content:center;
@@ -41,12 +52,12 @@ main{
 }
 header{text-align:center;margin-bottom:10px}
 header h1{
-  color:var(--acc);
+  color:var(--text);
   margin:0 0 2px;
   font-size:1.4em
 }
 header p{
-  color:var(--mut);
+  color:var(--muted);
   margin:0;
   font-size:.8em
 }
@@ -66,10 +77,10 @@ header p{
   padding-right:4px
 }
 .card{
-  background:var(--card);
-  border:2px solid transparent;
-  border-radius:10px;
-  padding:10px 12px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
   cursor:pointer;
   transition:transform .1s,border-color .1s;
   display:flex;
@@ -78,23 +89,23 @@ header p{
   min-height:75px
 }
 .card:hover,.card:focus{
-  border-color:var(--acc2);
+  border-color:var(--accent);
   outline:none;
   transform:translateY(-1px)
 }
 .card h2{
   font-size:.95em;
-  margin:0 0 2px;
-  color:var(--fg)
+  margin:0 0 4px;
+  color:var(--text)
 }
 .card p{
   font-size:.75em;
-  color:var(--mut);
+  color:var(--muted);
   margin:0
 }
 #resBox{
-  background:var(--card);
-  border:2px solid var(--acc);
+  background:var(--panel);
+  border:1px solid var(--accent);
   border-radius:12px;
   padding:16px;
   text-align:center;
@@ -107,7 +118,7 @@ header p{
 }
 #resBox.hidden{display:none}
 #resTitle{
-  color:var(--acc);
+  color:var(--accent);
   font-size:1.1em;
   margin-bottom:10px;
   font-weight:bold
@@ -117,19 +128,23 @@ header p{
   margin-bottom:12px;
   line-height:1.5;
   max-height:50vh;
-  overflow-y:auto
+  overflow-y:auto;
+  color:var(--text)
 }
 button.close{
   font:inherit;
-  background:#2a3350;
-  color:var(--fg);
+  background:var(--blue-success);
+  color:white;
   border:0;
-  border-radius:8px;
-  padding:.4em 1em;
+  border-radius:10px;
+  padding:.5em 1.2em;
   cursor:pointer;
-  font-size:.85em
+  font-size:.85em;
+  border:1px solid var(--border);
+  transition:background 0.2s, transform 0.1s;
 }
 button.close:active{transform:scale(.97)}
+button.close:hover{background:var(--accent-hover)}
 @media(max-width:700px){
   .content-layout{grid-template-columns:1fr}
   .grid{max-height:42vh}
@@ -491,7 +506,6 @@ function hideRes(){
   document.getElementById('resBox').classList.add('hidden');
 }
 
-// Auch die Enter-Taste und Leertaste funktionieren auf den Gadget-Kacheln.
 document.querySelectorAll('.card').forEach(card=>{
   card.addEventListener('keydown',event=>{
     if(event.key==='Enter'||event.key===' '){
@@ -504,14 +518,8 @@ document.querySelectorAll('.card').forEach(card=>{
 </body>
 </html>"""
 
+    def widget():
+        return {'icon': '🤹‍♀️', 'text': 'Fun Gadgets', 'sub': 'Couch-Tools für den Filmabend'}
 
-def widget(req):
-    return {
-        'title': 'Fun Gadgets',
-        'content': 'Fünf interaktive Couch-Gadgets mit 250 lustigen Sprüchen.'
-    }
-
-
-def register(api):
-    api.widget('Fun Gadgets', widget, ttl=3600, icon='🤹‍♀️')
-    api.route('index', lambda req: PAGE)
+    api.route('index', seite)
+    api.widget('Fun Gadgets', widget, ttl=60, icon='🤹‍♀️')
