@@ -114,12 +114,6 @@ function spin(){
 }
 </script></body></html>"""
 
-def widget():
-    return {
-        'text': 'Flaschendrehen',
-        'sub': 'Wer ist heute dran mit ... ?',
-        'lines': ['Tippen zum Starten auf der Couch']
-    }
 
 def register(api):
     api.widget('Flaschendrehen', widget, ttl=3600, icon='🍾')
