@@ -1,4 +1,3 @@
-Python
 
 # -*- coding: utf-8 -*-
 """Pacman Arcade: 10 Level, blinkende Power-Taler und Querformat-Steuerung."""
