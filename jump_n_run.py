@@ -727,4 +727,5 @@ loop();
 </html>"""
 
 def register(api):
+    api.widget('Fun Gadgets', widget, ttl=3600, icon='🎮')
     api.route('index', lambda req: PAGE)
