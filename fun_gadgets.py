@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 """Fun Gadgets Suite: Interaktive Couch-Tools, Snack-Picker, B-Movie-Generator und Orakel."""
 

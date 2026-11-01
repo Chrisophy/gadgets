@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 """MovieScout Platformer: 20 Level, Gegner, Münzen und Fernbedienungssteuerung."""
 
@@ -733,5 +732,5 @@ def widget(req):
     }
 
 def register(api):
-    api.widget('Jump & Run', widget, ttl=3600, icon='🎮')
+    api.widget('Jump & Run', widget, ttl=3600, icon='🏃‍♂️')
     api.route('index', lambda req: PAGE)

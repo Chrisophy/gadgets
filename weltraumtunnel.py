@@ -566,8 +566,9 @@ function draw(){
   ctx.shadowBlur=0;
 
   // Explosionen
-  for(const p of particles){
-    ctx.globalAlpha=Math.max(0,p.life/20);
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.globalAlpha=Math.max(0,p.life/20);
     ctx.fillStyle=p.color;
     ctx.fillRect(p.x,p.y,p.size,p.size);
   }
@@ -677,7 +678,6 @@ const endPointer = e => {
   if(!isTouching) return;
   e.preventDefault();
   
-  // Wenn es nur ein kurzer Tipp war (< 200ms), schieße Laser!
   if(Date.now() - touchStartTime < 200) {
     fireLaser();
   }
@@ -781,10 +781,9 @@ loop();
 def widget(req):
     return {
         'title': 'Weltraumtunnel',
-        'content': 'Weltraumtunnel: Atari-Arcade mit zerstörbaren Balken und Gegnern.'
+        'content': 'Atari-Arcade mit zerstörbaren Balken und Gegnern.'
     }
 
 def register(api):
     api.widget('Weltraumtunnel', widget, ttl=3600, icon='🚀')
     api.route('index', lambda req: PAGE)
-    
