@@ -3,7 +3,7 @@
 """MovieScout Platformer: 20 Level, Gegner, Münzen und Fernbedienungssteuerung."""
 
 EXT_ID = 'jump_n_run'
-EXT_NAME = 'Retro Jump & Run (20 Level)'
+EXT_NAME = 'Jump & Run'
 EXT_DESCRIPTION = '20 Level, 5 Leben, Schieß- und Hüpfgeister, Boss-Level.'
 EXT_LINKS = [('Spiel starten', 'index')]
 
@@ -726,6 +726,12 @@ loop();
 </body>
 </html>"""
 
+def widget(req):
+    return {
+        'title': 'Jump & Run',
+        'content': 'MovieScout Platformer: 20 Level, Gegner, Münzen und Fernbedienungssteuerung.'
+    }
+
 def register(api):
-    api.widget('Fun Gadgets', widget, ttl=3600, icon='🎮')
+    api.widget('Jump & Run', widget, ttl=3600, icon='🎮')
     api.route('index', lambda req: PAGE)

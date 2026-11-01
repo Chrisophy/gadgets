@@ -115,6 +115,12 @@ function spin(){
 </script></body></html>"""
 
 
+def widget(req):
+    return {
+        'title': 'Flaschendrehen',
+        'content': 'Flaschendrehen Orakel: Eine stylische Flasche als Kompassnadel (180° TV / 360° Mobil).'
+    }
+
 def register(api):
     api.widget('Flaschendrehen', widget, ttl=3600, icon='🍾')
     api.route('index', lambda req: PAGE)

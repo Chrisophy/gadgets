@@ -778,6 +778,11 @@ loop();
 </body>
 </html>"""
 
+def widget(req):
+    return {
+        'title': 'Weltraumtunnel',
+        'content': 'Weltraumtunnel: Atari-Arcade mit zerstörbaren Balken und Gegnern.'
+    }
 
 def register(api):
     api.widget('Weltraumtunnel', widget, ttl=3600, icon='🚀')
