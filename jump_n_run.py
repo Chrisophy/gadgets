@@ -5,6 +5,7 @@ EXT_ID = 'jump_n_run'
 EXT_NAME = 'Jump & Run'
 EXT_DESCRIPTION = '20 Level, 5 Leben, Schieß- und Hüpfgeister, Boss-Level.'
 EXT_LINKS = [('Spiel starten', 'index')]
+EXT_SETTINGS = []
 
 _api = None
 
@@ -703,8 +704,4 @@ loop();
 </html>
 '''
 
-    def widget():
-        return {'icon': '🏃‍♂️', 'text': 'Jump & Run', 'sub': '20 Level Arcade-Abenteuer'}
-
     api.route('index', seite)
-    api.widget('Jump & Run', widget, ttl=60, icon='🏃‍♂️')

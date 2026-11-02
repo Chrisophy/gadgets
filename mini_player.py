@@ -255,8 +255,4 @@ function toggleFullscreen() {
 </html>
 '''
 
-    def widget():
-        return {'icon': '📂', 'text': 'Mini Player', 'sub': 'Lokale Medien öffnen'}
-
     api.route('index', seite)
-    api.widget('Mini Player', widget, ttl=60, icon='📂')
