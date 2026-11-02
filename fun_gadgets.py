@@ -220,7 +220,7 @@ items:[
 "🍿 Popcorn! So viel, dass selbst das Sofa neidisch wird.",
 "🧀 Nachos mit Käsedip. Kalorien zählen heute nicht, sie schauen mit.",
 "🍕 Pizza um Mitternacht. Ernährung ist morgen wieder ein Thema.",
-"🍫 Schokolade! Because happiness sometimes has a square shape.",
+"🍫 Schokolade! Weil Glück manchmal eine quadratische Form hat.",
 "🥨 Salzstangen und Gummibärchen. Die perfekte Geschmacksverwirrung.",
 "🥤 Eiskalte Cola. Der Treibstoff eines echten Filmfans.",
 "🍔 Burger und Pommes. Heute wird nicht gekleckert, heute wird gelebt.",
@@ -282,7 +282,7 @@ items:[
 "🍿 Eine Folge noch. Das haben wir alle schon einmal gehört.",
 "🕛 Mitternacht? Nur eine Zahl auf deinem Bildschirm.",
 "📺 Die Staffel ist fast durch. Deine Vernunft leider auch.",
-"🧠 Dein Gehirn speichert gerade unnötiges Serienwissen für die Ewigkeit.",
+"🧠 Dein Gehirn speichert gerade unnützes Serienwissen für die Ewigkeit.",
 "⚡ Binge-Modus aktiviert. Realität wird vorübergehend pausiert.",
 "🌅 Der Sonnenaufgang ist nur der Abspann der Nacht.",
 "😎 Du brauchst keinen Schlaf. Du brauchst das Staffelfinale!",
@@ -518,4 +518,8 @@ document.querySelectorAll('.card').forEach(card=>{
 </body>
 </html>"""
 
+    def widget():
+        return {'icon': '🤹‍♀️', 'text': 'Fun Gadgets', 'sub': 'Couch-Tools für den Filmabend'}
+
     api.route('index', seite)
+    api.widget('Fun Gadgets', widget, ttl=60, icon='🤹‍♀️')

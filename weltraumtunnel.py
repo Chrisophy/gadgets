@@ -5,7 +5,6 @@ EXT_ID = 'weltraumtunnel'
 EXT_NAME = 'Weltraumtunnel'
 EXT_DESCRIPTION = 'Atari-Weltraumtunnel mit zerstörbaren Hindernissen und Gegnern.'
 EXT_LINKS = [('Spiel starten', 'index')]
-EXT_SETTINGS = []
 
 _api = None
 
@@ -737,4 +736,8 @@ loop();
 </html>
 '''
 
+    def widget():
+        return {'icon': '🚀', 'text': 'Weltraumtunnel', 'sub': 'Atari-Arcade'}
+
     api.route('index', seite)
+    api.widget('Weltraumtunnel', widget, ttl=60, icon='🚀')
