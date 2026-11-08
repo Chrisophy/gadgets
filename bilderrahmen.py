@@ -17,7 +17,7 @@ import re
 EXT_ID = 'bilderrahmen'
 EXT_NAME = 'Bilderrahmen'
 EXT_DESCRIPTION = 'Eigene Fotos (Ordner oder Adressen) laufen im Bildschirmschoner mit.'
-EXT_LINKS = [('Alle Bilder ansehen', 'index')]
+EXT_LINKS = [('Bilderrahmen', 'index')]
 EXT_SETTINGS = [
     {'key': 'ordner', 'label': 'Foto-Ordner', 'type': 'text', 'default': '', 'hint': 'Ordner auf dem Gerät mit der Engine (Unterordner werden mitgelesen).'},
     {'key': 'adressen', 'label': 'Bildadressen (eine pro Zeile)', 'type': 'textarea', 'default': ''},

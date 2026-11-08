@@ -7,7 +7,7 @@
 EXT_ID = 'fun_gadgets'
 EXT_NAME = 'Fun Gadgets'
 EXT_DESCRIPTION = 'Interaktive Couch-Tools mit Snack-Berater, Binge-Rechner, Fernbedienungs-Duell, B-Movie-Generator und magischem Orakel.'
-EXT_LINKS = [('Gadgets öffnen', 'index')]
+EXT_LINKS = [('Fun Gadgets', 'index')]
 EXT_SETTINGS = []
 
 _api = None

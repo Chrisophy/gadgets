@@ -16,7 +16,7 @@ import uuid
 EXT_ID = 'kuechentimer'
 EXT_NAME = 'Küchen-Timer'
 EXT_DESCRIPTION = 'Mehrere Timer mit Kachel und Alarm im Familienchat - von jedem Gerät bedienbar.'
-EXT_LINKS = [('Timer öffnen', 'index')]
+EXT_LINKS = [('Küchen-Timer', 'index')]
 EXT_SETTINGS = [
     {'key': 'chat', 'label': 'Alarm in den Familienchat schreiben', 'type': 'bool', 'default': True},
     {'key': 'presets', 'label': 'Presets (Name; Minuten, eine pro Zeile)', 'type': 'textarea',

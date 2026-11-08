@@ -20,7 +20,7 @@ from html import escape
 EXT_ID = 'jugendschutz'
 EXT_NAME = 'Jugendschutz-Filter'
 EXT_DESCRIPTION = 'Blendet Titel mit unerwünschten Wörtern und ausgewählte Quellen aus; Kontrollseite zeigt, was entfernt wurde.'
-EXT_LINKS = [('Was wurde ausgeblendet?', 'index')]
+EXT_LINKS = [('Jugendschutz', 'index')]
 EXT_SETTINGS = [
     {'key': 'aktiv', 'label': 'Filter einschalten', 'type': 'bool', 'default': True},
     {'key': 'woerter', 'label': 'Unerwünschte Wörter', 'type': 'textarea',

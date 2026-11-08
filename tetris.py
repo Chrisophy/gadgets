@@ -13,7 +13,7 @@ import threading
 EXT_ID = 'tetris'
 EXT_NAME = 'Tetris'
 EXT_DESCRIPTION = 'Tetris für Fernbedienung und Touch mit gemeinsamem Rekord und Kachel.'
-EXT_LINKS = [('Tetris öffnen', 'index')]
+EXT_LINKS = [('Tetris', 'index')]
 _api = None
 _lock = threading.Lock()
 

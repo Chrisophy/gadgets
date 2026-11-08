@@ -7,7 +7,7 @@
 EXT_ID = 'pacman'
 EXT_NAME = 'Pac-Man'
 EXT_DESCRIPTION = 'Pac-Man mit 20 verschiedenen Leveln, Tunneln, Dunkel-Leveln und bis zu 6 Geistern. Pfeiltasten/WASD, Wischen oder Bildschirm-Kreuz.'
-EXT_LINKS = [('Pac-Man spielen', 'index')]
+EXT_LINKS = [('Pac-Man', 'index')]
 EXT_SETTINGS = []
 
 

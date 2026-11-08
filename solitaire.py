@@ -16,7 +16,7 @@ import threading
 EXT_ID = 'solitaire'
 EXT_NAME = 'Solitaire'
 EXT_DESCRIPTION = 'Klondike-Solitaire für Fernbedienung und Touch, mit Rückgängig und Bestwerten.'
-EXT_LINKS = [('Solitaire öffnen', 'index')]
+EXT_LINKS = [('Solitaire', 'index')]
 EXT_SETTINGS = [
     {'key': 'ziehen', 'label': 'Karten pro Zug vom Stapel', 'type': 'select', 'default': '1', 'options': [['1', 'Eine Karte (leichter)'], ['3', 'Drei Karten (klassisch)']]},
 ]

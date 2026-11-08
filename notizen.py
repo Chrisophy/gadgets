@@ -16,7 +16,7 @@ import uuid
 EXT_ID = 'notizen'
 EXT_NAME = 'Notizzettel'
 EXT_DESCRIPTION = 'Gemeinsame Notizen/Einkaufsliste mit Kachel auf der Startseite und Knopf „Auf den Notizzettel“ in der Titel-Info.'
-EXT_LINKS = [('Notizzettel öffnen', 'index')]
+EXT_LINKS = [('Notizzettel', 'index')]
 EXT_SETTINGS = [
     {'key': 'zeilen', 'label': 'Zeilen in der Kachel', 'type': 'number', 'default': 4, 'min': 1, 'max': 8},
 ]

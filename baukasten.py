@@ -14,7 +14,7 @@ import zlib
 EXT_ID = 'baukasten'
 EXT_NAME = 'Scraper-Baukasten'
 EXT_DESCRIPTION = 'Baut Scraper per Assistent (Adresse eingeben), Formular und Antippen; tastet Seiten über die Engine ab.'
-EXT_LINKS = [('Scraper-Baukasten öffnen', 'index')]
+EXT_LINKS = [('Scraper-Baukasten', 'index')]
 
 _DATA = (
     'eNq8u2mzo0iSLvy9f0XeGrtmU5fKZN8yp8cu+44AgSQ0Nh/YQWIHsais/vuLzpJ5cqvqbpv3ZpkdCUS4R7h7PP64B/Uf/ytuonFt'

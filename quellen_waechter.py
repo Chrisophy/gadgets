@@ -15,7 +15,7 @@ from html import escape
 EXT_ID = 'quellen_waechter'
 EXT_NAME = 'Quellen-Wächter'
 EXT_DESCRIPTION = 'Meldet im Familienchat, wenn eine Quelle länger ausfällt - und wenn sie wieder läuft.'
-EXT_LINKS = [('Zustand der Quellen', 'index')]
+EXT_LINKS = [('Quellen-Wächter', 'index')]
 EXT_SETTINGS = [
     {'key': 'ab_minuten', 'label': 'Als ausgefallen melden nach … Minuten', 'type': 'number', 'default': 60, 'min': 0, 'max': 1440},
     {'key': 'chat', 'label': 'Meldungen in den Familienchat schreiben', 'type': 'bool', 'default': True},

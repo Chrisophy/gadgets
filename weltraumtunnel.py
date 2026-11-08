@@ -7,7 +7,7 @@
 EXT_ID = 'weltraumtunnel'
 EXT_NAME = 'Weltraumtunnel'
 EXT_DESCRIPTION = 'Atari-Weltraumtunnel mit zerstörbaren Hindernissen und Gegnern.'
-EXT_LINKS = [('Spiel starten', 'index')]
+EXT_LINKS = [('Weltraumtunnel', 'index')]
 
 _api = None
 

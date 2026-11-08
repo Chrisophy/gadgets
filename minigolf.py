@@ -8,7 +8,7 @@ Läuft komplett lokal (HTML5-Canvas, keine externen Dateien)."""
 EXT_ID = 'minigolf'
 EXT_NAME = 'Minigolf'
 EXT_DESCRIPTION = 'Arcade-Minigolf mit 18 Bahnen: Windmühlen, Wasser, Brücken, Tunnel, Gefälle, Eis und Sand. Joystick zielt, Knopf halten = Kraft, loslassen = Schlag.'
-EXT_LINKS = [('Minigolf spielen', 'index')]
+EXT_LINKS = [('Minigolf', 'index')]
 EXT_SETTINGS = []
 
 

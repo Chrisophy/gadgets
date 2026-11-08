@@ -12,7 +12,7 @@ import html
 EXT_ID = 'tv_spielfilm'
 EXT_NAME = 'TV Spielfilm'
 EXT_DESCRIPTION = 'Echtes TV-Programm: Jetzt & ab 20:00 Uhr (A-Z, Multi-Column Grid).'
-EXT_LINKS = [('TV Zeitschrift öffnen', 'index')]
+EXT_LINKS = [('TV Spielfilm', 'index')]
 EXT_SETTINGS = []
 
 _api = None

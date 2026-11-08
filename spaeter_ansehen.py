@@ -17,7 +17,7 @@ import uuid
 EXT_ID = 'spaeter_ansehen'
 EXT_NAME = 'Später ansehen'
 EXT_DESCRIPTION = 'Gemeinsame Merkliste: Titel vormerken, verwalten und mit abspielbarem Eintrag in den Familienchat schicken.'
-EXT_LINKS = [('Merkliste öffnen', 'index')]
+EXT_LINKS = [('Später ansehen', 'index')]
 EXT_SETTINGS = [
     {'key': 'max_eintraege', 'label': 'Maximale Anzahl Einträge', 'type': 'number',
      'default': 300, 'min': 20, 'max': 2000},

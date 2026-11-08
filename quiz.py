@@ -15,7 +15,7 @@ import threading
 EXT_ID = 'quiz'
 EXT_NAME = 'Filmquiz'
 EXT_DESCRIPTION = 'Filmquiz mit 40 Fragen für Fernbedienung und Touch, eigene Fragen möglich, gemeinsamer Rekord.'
-EXT_LINKS = [('Quiz starten', 'index')]
+EXT_LINKS = [('Filmquiz', 'index')]
 EXT_SETTINGS = [
     {'key': 'anzahl', 'label': 'Fragen pro Runde', 'type': 'number', 'default': 10, 'min': 3, 'max': 30},
     {'key': 'zeit', 'label': 'Sekunden pro Frage', 'type': 'number', 'default': 15, 'min': 5, 'max': 60},

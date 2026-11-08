@@ -17,7 +17,7 @@ import time
 EXT_ID = 'pong'
 EXT_NAME = 'Pong'
 EXT_DESCRIPTION = 'Pong für zwei Geräte im Heimnetz (oder gegen den Computer) - Fernbedienung und Touch, Siegerliste.'
-EXT_LINKS = [('Pong öffnen', 'index')]
+EXT_LINKS = [('Pong', 'index')]
 EXT_SETTINGS = [
     {'key': 'ziel', 'label': 'Gewonnen hat, wer … Punkte erreicht', 'type': 'number', 'default': 7, 'min': 1, 'max': 21},
     {'key': 'tempo', 'label': 'Spieltempo (1 = normal)', 'type': 'number', 'default': 1, 'min': 0.5, 'max': 3},

@@ -18,7 +18,7 @@ from html import escape
 EXT_ID = 'statistik'
 EXT_NAME = 'Statistik'
 EXT_DESCRIPTION = 'Zählt die Sehzeit: Kachel „Diese Woche“ und Seite mit Monat, Jahr, Lieblingstiteln und Quellen.'
-EXT_LINKS = [('Meine Statistik', 'index')]
+EXT_LINKS = [('Statistik', 'index')]
 EXT_SETTINGS = [
     {'key': 'aktiv', 'label': 'Wiedergaben mitzählen', 'type': 'bool', 'default': True},
     {'key': 'min_sek', 'label': 'Erst ab … Sekunden zählen', 'type': 'number', 'default': 60, 'min': 0, 'max': 3600,

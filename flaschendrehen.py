@@ -7,7 +7,7 @@
 EXT_ID = 'flaschendrehen'
 EXT_NAME = 'Flaschendrehen'
 EXT_DESCRIPTION = 'Eine drehbare Flasche als Orakel für den Filmabend mit 180° (TV) und 360° (Mobil) Modus.'
-EXT_LINKS = [('Flaschendrehen starten', 'index')]
+EXT_LINKS = [('Flaschendrehen', 'index')]
 
 _api = None
 

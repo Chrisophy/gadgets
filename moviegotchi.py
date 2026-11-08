@@ -7,7 +7,7 @@
 EXT_ID = 'moviegotchi'
 EXT_NAME = 'MovieGotchi'
 EXT_DESCRIPTION = 'Kümmere dich um dein eigenes virtuelles Haustier im Tamagotchi-Stil.'
-EXT_LINKS = [('MovieGotchi öffnen', 'index')]
+EXT_LINKS = [('MovieGotchi', 'index')]
 EXT_SETTINGS = []
 
 _api = None

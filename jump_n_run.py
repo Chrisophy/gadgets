@@ -7,7 +7,7 @@
 EXT_ID = 'jump_n_run'
 EXT_NAME = 'Jump & Run'
 EXT_DESCRIPTION = '20 Level, 5 Leben, Schieß- und Hüpfgeister, Boss-Level.'
-EXT_LINKS = [('Spiel starten', 'index')]
+EXT_LINKS = [('Jump & Run', 'index')]
 
 _api = None
 

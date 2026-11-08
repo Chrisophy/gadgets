@@ -14,7 +14,7 @@ import threading
 EXT_ID = 'minispiele'
 EXT_NAME = 'Minispiele'
 EXT_DESCRIPTION = 'Snake, 2048 und Memory für Fernbedienung und Touch - mit gemeinsamen Rekorden und Kachel.'
-EXT_LINKS = [('Minispiele öffnen', 'index')]
+EXT_LINKS = [('Minispiele', 'index')]
 
 SPIELE = {'snake': 'hoch', '2048': 'hoch', 'memory': 'niedrig'}      # hoch = mehr ist besser, niedrig = weniger (Züge)
 _api = None

@@ -2,7 +2,7 @@
 # Nachrichten & Podcast
 # IT('s) Possible 
 # 2026.11.08
-"""Nachrichten & Podcasts: liest RSS-/Atom-Feeds (Nachrichten, Blogs, Podcasts, Video-Podcasts).
+"""Nachrichten: liest RSS-/Atom-Feeds (Nachrichten, Blogs, Podcasts, Video-Podcasts).
 
 So geht es: In den Einstellungen unter „Feeds“ pro Zeile  Name; Adresse  eintragen. Beispiel:
     Tagesschau; https://www.tagesschau.de/index~rss2.xml
@@ -19,9 +19,9 @@ import urllib.request
 import xml.etree.ElementTree as ET
 
 EXT_ID = 'nachrichten'
-EXT_NAME = 'Nachrichten & Podcasts'
+EXT_NAME = 'Nachrichten'
 EXT_DESCRIPTION = 'RSS-Reader: Kachel mit Schlagzeilen, Leseseite und abspielbare Podcasts/Videos aus beliebigen Feeds.'
-EXT_LINKS = [('Nachrichten lesen', 'index')]
+EXT_LINKS = [('Nachrichten', 'index')]
 EXT_SETTINGS = [
     {'key': 'feeds', 'label': 'Feeds (einer pro Zeile)', 'type': 'textarea',
      'default': 'Tagesschau; https://www.tagesschau.de/index~rss2.xml',

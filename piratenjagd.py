@@ -23,7 +23,7 @@ EXT_ID = 'piratenjagd'
 EXT_GUEST = True               # Gäste aus „Teilen im WLAN“ (mit Passwort) dürfen mitspielen - braucht MovieScout ab 2.38.0
 EXT_NAME = 'Piraten Jagd'
 EXT_DESCRIPTION = 'Schiffe-Arena für bis zu 4 Spieler im Heimnetz (Fernseher, Handy) oder gegen Bots - Fernbedienung und Touch.'
-EXT_LINKS = [('Piraten Jagd öffnen', 'index')]
+EXT_LINKS = [('Piraten Jagd', 'index')]
 EXT_SETTINGS = [
     {'key': 'ziel', 'label': 'Gewonnen hat, wer … Schiffe versenkt hat', 'type': 'number', 'default': 5, 'min': 2, 'max': 20},
     {'key': 'bots', 'label': 'Bot-Stärke (1 leicht, 2 mittel, 3 schwer)', 'type': 'number', 'default': 2, 'min': 1, 'max': 3},

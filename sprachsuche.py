@@ -12,7 +12,7 @@ Ohne Mikrofon fragt MovieScout den Suchbegriff wie gewohnt per Tastatur ab.
 EXT_ID = 'sprachsuche'
 EXT_NAME = 'Sprachsuche'
 EXT_DESCRIPTION = 'Kachel zum Starten der Spracheingabe (Mikrofon) - auch für Looks ohne Kopfzeile.'
-EXT_LINKS = [('Sprachsuche starten', 'index')]
+EXT_LINKS = [('Sprachsuche', 'index')]
 
 _PAGE = ('<!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
          '<title>Sprachsuche</title><style>body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;'
