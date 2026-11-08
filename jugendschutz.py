@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Jugendschutz-Filter
+# IT('s) Possible 
+# 2026.11.08
 """Jugendschutz-Filter: blendet Einträge mit unerwünschten Wörtern im Titel aus - und auf Wunsch ganze Quellen.
 
 So geht es: In den Einstellungen der Erweiterung stehen die Wörter (komma-getrennt). Es zählen ganze Wörter,
@@ -122,6 +125,11 @@ def register(api):
         api.set('hits', [])
         return {'ok': True}
 
+    def widget():
+        return {'icon': '🛡️', 'text': 'Filter an' if api.get('aktiv') else 'Filter aus',
+                'sub': '%d Einträge ausgeblendet' % int(api.get('count', 0) or 0)}
+
+    api.widget('Jugendschutz', widget, ttl=60, id='jugendschutz', icon='🛡️')
     api.route('index', page)
     api.route('leeren', clear)
     api.route('status', lambda req: {'aktiv': bool(api.get('aktiv')), 'count': int(api.get('count', 0) or 0)})

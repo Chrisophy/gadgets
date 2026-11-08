@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Notizen
+# IT('s) Possible 
+# 2026.11.08
 """Notizzettel: gemeinsame Notizen und Einkaufsliste für alle Geräte im Haus.
 
 Öffnen: Erweiterungsliste -> Notizen -> „Notizzettel öffnen“ (oder als Lesezeichen am Handy). Dort Notiz eintippen,

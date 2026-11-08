@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# MovieGotchi
+# IT('s) Possible 
+# 2026.11.08
 """MovieGotchi: Dein virtuelles Haustier für MovieScout."""
 
 EXT_ID = 'moviegotchi'

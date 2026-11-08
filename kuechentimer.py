@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Küchen-Timer
+# IT('s) Possible 
+# 2026.11.08
 """Küchen-Timer: mehrere Timer für alle Geräte im Haus, mit Alarm im Familienchat.
 
 So geht es: Erweiterungsliste -> Küchen-Timer -> „Timer öffnen“. Dort ein Preset antippen (Ei, Nudeln, Tee …) oder eigene Minuten
@@ -156,8 +159,8 @@ def register(api):
 
     def widget():
         run = sorted((r for r in liste() if not r.get('fertig') and r['ende'] > time.time()), key=lambda r: r['ende'])
-        if not run:
-            return None
+        if not run:                                   # immer etwas zeigen, sonst fehlt das Symbol (Puzzle)
+            return {'icon': '⏲️', 'text': 'Küchen-Timer', 'sub': 'Kein Timer läuft'}
         return {'icon': '⏲️', 'text': '%s %s' % (run[0]['name'][:20], fmt(run[0]['ende'] - time.time())),
                 'sub': '%d Timer läuft' % len(run) if len(run) == 1 else '%d Timer laufen' % len(run),
                 'lines': ['%s %s' % (r['name'], fmt(r['ende'] - time.time())) for r in run[1:5]]}

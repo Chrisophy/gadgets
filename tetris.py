@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Tetris
+# IT('s) Possible 
+# 2026.11.08
 """Tetris: Steine stapeln, Reihen füllen - mit Fernbedienung und Touch spielbar, Rekord gilt für alle Geräte.
 
 Öffnen: Erweiterungsliste -> Tetris -> „Tetris öffnen“.

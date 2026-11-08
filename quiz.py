@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Filmquiz
+# IT('s) Possible 
+# 2026.11.08
 """Filmquiz: zehn Fragen rund ums Kino - mit Fernbedienung und Touch spielbar, Rekord gilt für alle Geräte.
 
 Öffnen: Erweiterungsliste -> Filmquiz -> „Quiz starten“.

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Himmel
+# IT('s) Possible 
+# 2026.11.08
 """Himmel: Sonnenauf- und -untergang, Tageslänge und Mondphase - offline berechnet, als Kachel.
 
 Stelle in den Einstellungen deinen Ort ein (Breiten-/Längengrad, z. B. aus Google Maps: Rechtsklick auf den Ort).

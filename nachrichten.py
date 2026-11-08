@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Nachrichten & Podcast
+# IT('s) Possible 
+# 2026.11.08
 """Nachrichten & Podcasts: liest RSS-/Atom-Feeds (Nachrichten, Blogs, Podcasts, Video-Podcasts).
 
 So geht es: In den Einstellungen unter „Feeds“ pro Zeile  Name; Adresse  eintragen. Beispiel:

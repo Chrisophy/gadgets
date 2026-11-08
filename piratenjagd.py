@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Piraten Jagd
+# IT('s) Possible 
+# 2026.11.08
 """Piraten Jagd: Schiffe-Arena für bis zu 4 Spieler im Haus - jeder an seinem Gerät (Fernseher, Handy, Tablet) oder gegen Bots.
 
 Öffnen: Erweiterungsliste -> Piraten Jagd -> „Piraten Jagd öffnen“ (auf dem Gerät, auf dem die Engine läuft). Mitspieler in anderen

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Solitaire
+# IT('s) Possible 
+# 2026.11.08
 """Solitaire (Klondike): Karten-Patience für Fernbedienung und Touch - mit Rückgängig, Auto-Ablage und Bestwerten.
 
 Öffnen: Erweiterungsliste -> Solitaire -> „Solitaire öffnen“.

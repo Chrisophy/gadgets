@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Gesehen-Haken
+# IT('s) Possible 
+# 2026.11.08
 """Gesehen-Haken: Filme und Folgen, die du fertig geschaut hast, bekommen vorn ein ✓.
 
 So geht es: Wird eine Wiedergabe bis fast zum Ende geschaut (Standard: 90 %), merkt sich die Erweiterung den Titel.
@@ -109,6 +112,11 @@ def register(api):
                 '<style>body{font:16px/1.5 system-ui;margin:0;padding:18px;max-width:700px;margin-inline:auto;background:#0f141b;color:#e8edf3}small{color:#93a1b3}</style>'
                 '<h1>✓ Gesehen (%d)</h1><ol>%s</ol>' % (len(_seen()), lis or '<p>Noch nichts.</p>'))
 
+    def widget():
+        n = len(_seen())
+        return {'icon': '✅', 'text': '%d gesehen' % n, 'sub': 'Filme und Folgen mit Haken'}
+
+    api.widget('Gesehen', widget, ttl=60, id='gesehen', icon='✅')
     api.route('liste', liste)
     api.route('status', lambda req: {'count': len(_seen())})
     api.item_action('✓ Gesehen / Ungesehen', toggle, needs='url')

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Zufallsfilm
+# IT('s) Possible 
+# 2026.11.08
 """Zufallsfilm: „Was schauen wir heute?“ - ein Menüpunkt, der ein paar zufällige Filme aus deinen Quellen vorschlägt.
 
 So geht es: Auf der Startseite die Kachel „🎲 Zufall“ öffnen. Die Erweiterung wählt eine Quelle, geht einen Ordner

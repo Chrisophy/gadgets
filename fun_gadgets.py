@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Fun Gadgets
+# IT('s) Possible 
+# 2026.11.08
 """Fun Gadgets Suite: Interaktive Couch-Tools, Snack-Picker, B-Movie-Generator und Orakel."""
 
 EXT_ID = 'fun_gadgets'

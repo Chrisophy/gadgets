@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Pac-Man
+# IT('s) Possible 
+# 2026.11.08
 """Pac-Man: 20 abwechslungsreiche Level, Tunnel mit Wrap-around, vier+ Geister mit eigener Taktik."""
 
 EXT_ID = 'pacman'

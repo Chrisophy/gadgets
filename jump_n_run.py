@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Jump & Run
+# IT('s) Possible 
+# 2026.11.08
 """MovieScout Platformer: 20 Level, Gegner, Münzen und Fernbedienungssteuerung."""
 
 EXT_ID = 'jump_n_run'

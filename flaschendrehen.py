@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Flaschendrehen
+# IT('s) Possible 
+# 2026.11.08
 """Flaschendrehen Orakel: Eine stylische Flasche als Kompassnadel (180° TV / 360° Mobil)."""
 
 EXT_ID = 'flaschendrehen'

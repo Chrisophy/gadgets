@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Bilderrahmen
+# IT('s) Possible 
+# 2026.11.08
 """Bilderrahmen: eigene Fotos im Bildschirmschoner (statt oder zusätzlich zu den Titelbildern).
 
 So geht es: In den Einstellungen einen Ordner mit Fotos eintragen (Ordner auf dem Gerät, auf dem MovieScout läuft, z. B.
@@ -64,8 +67,8 @@ def register(api):
     def widget():
         n = max(5, int(api.get('anzahl') or 25))
         pool = ['/api/x/%s/bild?f=%s' % (EXT_ID, __import__('urllib.parse').parse.quote(f)) for f in dateien()] + adressen()
-        if not pool:
-            return None
+        if not pool:                                   # immer etwas zeigen, sonst fehlt das Symbol (Puzzle)
+            return {'icon': '🖼️', 'text': 'Bilderrahmen', 'sub': 'Ordner oder Adressen in den Einstellungen eintragen'}
         random.shuffle(pool)
         return {'bilder': pool[:n]}
 

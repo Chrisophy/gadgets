@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# TV Spielfilm 
+# IT('s) Possible 
+# 2026.11.08
 """TV Spielfilm: Echte Programmdaten, Sender & Abendprogramm (A-Z, Multi-Column Grid) als MovieScout-Erweiterung."""
 
 import urllib.request

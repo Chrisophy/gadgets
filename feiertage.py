@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Feiertage
+# IT('s) Possible 
+# 2026.11.08
 """Feiertage: Kachel „Nächster Feiertag“ mit Countdown (gesetzliche Feiertage in Deutschland, ohne Internet).
 
 Das Bundesland stellst du in den Einstellungen ein. Die Kachel zeigt auch die zwei Feiertage danach.

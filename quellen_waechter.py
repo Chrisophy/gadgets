@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Quellen-Wächter
+# IT('s) Possible 
+# 2026.11.08
 """Quellen-Wächter: sagt im Familienchat Bescheid, wenn eine Quelle ausfällt - und wenn sie wieder läuft.
 
 Die Engine prüft ihre Quellen ohnehin regelmäßig im Hintergrund (Diagnose). Der Wächter schaut dort nur nach und
@@ -87,6 +90,17 @@ def register(api):
                 '<h1>🩺 Zustand der Quellen</h1><table><tr><th></th><th>Quelle</th><th>Gestört seit</th><th>Grund</th></tr>%s</table>'
                 '<h2>Letzte Meldungen</h2><ul>%s</ul></html>' % (rows, log or '<li><small>Noch keine.</small></li>'))
 
+    def widget():
+        try:
+            snap = _snapshot()
+        except Exception:                            # noqa: BLE001 - Kachel darf nie stören
+            snap = []
+        ok = sum(1 for s in snap if s['status'] == 'ok')
+        down = [s['name'] for s in snap if s['status'] in ('error', 'empty')]
+        return {'icon': '🩺', 'text': '%d von %d laufen' % (ok, len(snap)) if snap else 'Quellen',
+                'sub': ('Gestört: ' + ', '.join(down[:2])) if down else 'Alle Quellen in Ordnung'}
+
+    api.widget('Quellen', widget, ttl=120, id='quellen', icon='🩺')
     api.route('index', page)
     api.route('jetzt', lambda req: {'gesendet': pruefen()} if req.method == 'POST' else ({'error': 'Nur per POST'}, 405))
     api.every(15, pruefen, name='Quellen ansehen', first_delay=120)

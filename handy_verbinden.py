@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Handy verbinden
+# IT('s) Possible 
+# 2026.11.08
 """Handy verbinden: Kachel mit der Adresse, unter der MovieScout im Heimnetz erreichbar ist.
 
 Gedacht für den Fernseher oder PC: Die Adresse steht groß in der Kachel (und im Bildschirmschoner), das Handy muss im

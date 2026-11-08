@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Spruch des Tages
+# IT('s) Possible 
+# 2026.11.08
 """Spruch des Tages: ein Gedanke zum Tag als Kachel (jeden Tag ein anderer) - mit eigenen Sprüchen erweiterbar.
 
 Die mitgelieferten Sprüche sind Klassiker und Sprichwörter. Eigene Sprüche trägst du in den Einstellungen ein

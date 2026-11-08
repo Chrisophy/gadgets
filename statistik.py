@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Statistik
+# IT('s) Possible 
+# 2026.11.08
 """Statistik: wie viel wurde geschaut? (Woche, Monat, Jahr, Lieblingstitel und -quellen)
 
 Die Erweiterung zählt mit, wenn eine Wiedergabe endet, und rechnet daraus die ungefähre Sehzeit aus.
@@ -179,7 +182,7 @@ def _page(req):
             'ol{padding-left:1.3em;margin:.2em 0}li{margin:.25em 0}small,.m{color:var(--mut)}'
             '.g{height:10px;background:var(--card);border-radius:5px;overflow:hidden}.g div{height:100%;background:var(--acc)}'
             'button{font:inherit;padding:8px 14px;border-radius:10px;border:1px solid var(--mut);background:transparent;color:var(--fg);margin-top:22px}'
-            '</style><h1>📊 Meine Statistik</h1>'
+            '</style><h1>?? Meine Statistik</h1>'
             '<div class="row">' + card('Diese Woche', s['week'], '%d Wiedergaben' % s['n_week']) + card('Dieser Monat', s['month'])
             + card('Dieses Jahr', s['year']) + card('Insgesamt', s['all'], '%d Wiedergaben' % s['n_all']) + '</div>' + goal +
             '<h2>Letzte 14 Tage</h2><div class="chart">' + bars + '</div>'

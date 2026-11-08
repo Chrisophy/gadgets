@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Minispiele
+# IT('s) Possible 
+# 2026.11.08
 """Minispiele: Snake, 2048 und Memory - mit Fernbedienung (Pfeiltasten + OK) und per Touch (Wischen/Tippen) spielbar.
 
 Öffnen: Erweiterungsliste -> Minispiele -> „Minispiele öffnen“ (im Browser des Geräts; am Fernseher mit der Fernbedienung).

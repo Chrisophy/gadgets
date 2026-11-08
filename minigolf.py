@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Minigolf
+# IT('s) Possible 
+# 2026.11.08
 """Minigolf: 18 Bahnen in 3D-Perspektive, Joystick + ein Schlag-Knopf, Münzen, freischaltbare Bälle, Speicherstand.
 Läuft komplett lokal (HTML5-Canvas, keine externen Dateien)."""
 

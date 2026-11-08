@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Weltraumtunnel 
+# IT('s) Possible 
+# 2026.11.08
 """Weltraumtunnel: Atari-Arcade mit zerstörbaren Balken und Gegnern."""
 
 EXT_ID = 'weltraumtunnel'

@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Countdown
+# IT('s) Possible 
+# 2026.11.08
 """Countdown: Tage bis zu Urlaub, Geburtstagen und anderen Terminen - als Kachel auf der Startseite.
 
 Die Termine stehen in den Einstellungen, einer pro Zeile:

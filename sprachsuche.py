@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# ARD Mediathek 
+# Sprachsuche
 # IT('s) Possible 
-# 2026.11.07
+# 2026.11.08
 """Sprachsuche als Gadget: ein Tipp auf die Kachel startet die Spracheingabe von MovieScout.
 
 Für Geräte mit Mikrofon (Handy, Tablet, Fernbedienung mit Mikrofon). Die Kachel erscheint im Schnellzugriff der Startseite

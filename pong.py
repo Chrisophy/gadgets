@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Pong
+# IT('s) Possible 
+# 2026.11.08
 """Pong im Netzwerk: zwei Geräte im Haus spielen gegeneinander - oder einer gegen den Computer.
 
 Öffnen: Erweiterungsliste -> Pong -> „Pong öffnen“ (auf beiden Geräten). Name eingeben, „Mitspielen“ wählen.
