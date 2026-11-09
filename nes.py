@@ -165,7 +165,7 @@ function press(b,on){if(!nes)return;const k=BT[b];if(held[b]===on)return;held[b]
   const set=x=>on?nes.buttonDown(1,x):nes.buttonUp(1,x);setTimeout(hud,0);
   if(b==='A'&&cfg.ok==='B'){set(1)}else set(k)}
 function okPress(on){press('A',on);if(cfg.ok==='AB')press('B',on)}
-function release(){Object.keys(relT).forEach(b=>{clearTimeout(relT[b]);delete relT[b]});Object.keys(latched).forEach(b=>delete latched[b]);Object.keys(held).forEach(b=>press(b,false))}
+function release(){for(const b in kt)delete kt[b];Object.keys(relT).forEach(b=>{clearTimeout(relT[b]);delete relT[b]});Object.keys(latched).forEach(b=>delete latched[b]);Object.keys(held).forEach(b=>press(b,false))}
 const KMAP=(e)=>{const k=e.key,c=e.keyCode,cd=e.code,blank=(k==='Unidentified'||k==='');
   if(k==='ArrowUp'||cd==='ArrowUp'||blank&&c===38)return'U';if(k==='ArrowDown'||cd==='ArrowDown'||blank&&c===40)return'D';if(k==='ArrowLeft'||cd==='ArrowLeft'||blank&&c===37)return'L';if(k==='ArrowRight'||cd==='ArrowRight'||blank&&c===39)return'R';
   if(k==='Enter'||k==='Select'||c===23||c===66||k==='x'||k==='X')return'OK';
@@ -174,7 +174,7 @@ const KMAP=(e)=>{const k=e.key,c=e.keyCode,cd=e.code,blank=(k==='Unidentified'||
   if(k==='a'||k==='A'||k==='Shift'||c===109||k==='MediaRewind'||c===89&&k!=='y'&&k!=='Y')return'SEL';if(c===96||c===100)return'OK';if(c===97||c===99)return'B';if(c===108)return'STA';return''};
 const isMenuKey=e=>e.key==='Home'||e.key==='BrowserHome'||e.key==='ContextMenu'||e.keyCode===3||e.keyCode===82||e.key==='m'||e.key==='M';
 const isBack=e=>e.key==='Escape'||e.key==='Backspace'||e.key==='GoBack'||e.key==='BrowserBack'||e.keyCode===4;
-document.addEventListener('blur',()=>{release()});
+addEventListener('blur',()=>{release()});document.addEventListener('visibilitychange',()=>{if(document.hidden)release()});document.addEventListener('focusout',e=>{if(!e.relatedTarget&&mode==='game')setTimeout(()=>{if(!document.hasFocus())release()},50)});
 addEventListener('keydown',e=>{
   if(mode==='browse'){const n=(cur.list||[]).length;
     if(e.key==='ArrowDown'){e.preventDefault();if(n){sel=(sel+1)%n;paint()}}else if(e.key==='ArrowUp'){e.preventDefault();if(n){sel=(sel+n-1)%n;paint()}}
@@ -185,8 +185,11 @@ addEventListener('keydown',e=>{
     else if(e.key==='Enter'||e.key==='Select'||e.keyCode===23||e.keyCode===66){mitems[msel].go()}else if(isMenuKey(e)||isBack(e)){menuHide()}return}
   if(mode==='game'){wake();
     if(isMenuKey(e)||isBack(e)){e.preventDefault();menuShow();return}
-    const b=KMAP(e);if(!b)return;e.preventDefault();keyDown(b)}});
-document.addEventListener('keyup',e=>{if(mode!=='game')return;const b=KMAP(e);if(!b)return;e.preventDefault();keyUp(b)});
+    const b=KMAP(e);if(!b)return;e.preventDefault();kt[b]=performance.now();if(e.repeat)rep[b]=1;keyDown(b)}});
+document.addEventListener('keyup',e=>{if(mode!=='game')return;const b=KMAP(e);if(!b)return;e.preventDefault();delete kt[b];keyUp(b)});
+/* Sicherung gegen verlorene „Taste losgelassen“-Meldungen (Figur rennt dann endlos): Sendet eine Fernbedienung beim Gedrückthalten Wiederholungen, gilt eine Taste
+   als losgelassen, wenn länger als 0,7 s keine mehr kommt. Fernbedienungen ohne Wiederholungen bleiben unberührt. */
+const kt={},rep={};setInterval(()=>{const now=performance.now();for(const b in kt)if(rep[b]&&now-kt[b]>700){delete kt[b];keyUp(b)}},150);
 /* Gamepad-Schnittstelle: nur auf Wunsch (Einstellung). Wer navigator.getGamepads() abfragt, nimmt dem Android-WebView am Fernseher die Pfeiltasten weg:
    sie landen dann im Gamepad-Zweig statt als Tastenereignis. Controller am TV melden sich ohnehin als Tasten (siehe KMAP). */
 let gpPrev={};function gpStart(){setInterval(()=>{if(mode==='browse'||!navigator.getGamepads)return;const g=[...navigator.getGamepads()].find(x=>x&&x.connected&&x.mapping==='standard');if(!g)return;
